@@ -1,11 +1,24 @@
 package spring.patty.spring5webapp.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Set;
 
 /**
  * Created by patrickskelley on Mar, 2020
  */
+
+@Entity
 public class Author {
+
+    // since this is an entity need @Id annotation & field
+    @Id // property mgmd by db i.e. id generation SQL
+    @GeneratedValue(strategy = GenerationType.AUTO) // tells hybernate how it's getting generated
+    private Long id;
+
+
     private String firstName;
     private String lastName;
     private Set<Book> books;
@@ -16,6 +29,15 @@ public class Author {
         this.firstName = firstName;
         this.lastName = lastName;
         this.books = books;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
