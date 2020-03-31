@@ -1,9 +1,6 @@
 package spring.patty.spring5webapp.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -21,6 +18,9 @@ public class Author {
 
     private String firstName;
     private String lastName;
+
+    // many to many relationship to books, and mapped by authors
+    @ManyToMany(mappedBy = "authors")
     private Set<Book> books;
 
     public Author(){}

@@ -1,9 +1,6 @@
 package spring.patty.spring5webapp.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Set;
 
 /**
@@ -18,6 +15,15 @@ public class Book {
 
     private String title;
     private String isbn;
+
+    // many to many relationship needs join tbl setup
+    // create a join table called author_book that will:
+    // hold relationship b/t rec in auth tbl and rec in book tbl
+    // setting up properties within join tbl. 
+    @ManyToMany
+    @JoinTable(name = "author_book",
+               joinColumns = @JoinColumn(name = "book_id"),
+               inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors;
 
     public Book() {}
