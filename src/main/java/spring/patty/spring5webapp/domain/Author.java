@@ -30,8 +30,7 @@ public class Author {
         this.lastName = lastName;
         this.books = books;
     }
-
-
+    
     public Long getId() {
         return id;
     }
