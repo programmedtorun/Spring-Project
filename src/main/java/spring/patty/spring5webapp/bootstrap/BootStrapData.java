@@ -18,7 +18,7 @@ import spring.patty.spring5webapp.repositories.PublisherRepository;
 
  implementing interface CommandLineRunner which has
  one method to implement "run."
- 
+
  */
 
 
