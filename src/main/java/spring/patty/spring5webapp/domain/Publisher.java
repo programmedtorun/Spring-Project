@@ -76,7 +76,7 @@ public class Publisher {
 
     @Override
     public String toString() {
-        return "Publisher{" +
+        return "PublisherRepository{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", addressLineOne='" + addressLineOne + '\'' +
