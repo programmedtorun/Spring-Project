@@ -1,9 +1,8 @@
 package spring.patty.spring5webapp.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by patrickskelley on Apr, 2020
@@ -13,17 +12,33 @@ public class Publisher {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO) // how it is being persisted.
     long id;
-    String name;
-    String addressLineOne;
-    String city;
-    String state;
-    String zip;
+    private String name;
+    private String addressLineOne;
+    private String city;
+    private String state;
+    private String zip;
+
+    // hint to add pub id to book record to track the pub.
+    // will create foreign key relationship
+    @OneToMany
+    @JoinColumn(name = "publisher_id")
+    private Set<Book> books = new HashSet<>();
+
+    public Publisher(){}
 
 
     public Publisher(String name) {
         this.name = name;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 
     public long getId() {
@@ -93,23 +108,11 @@ public class Publisher {
 
         Publisher publisher = (Publisher) o;
 
-        if (id != publisher.id) return false;
-        if (name != null ? !name.equals(publisher.name) : publisher.name != null) return false;
-        if (addressLineOne != null ? !addressLineOne.equals(publisher.addressLineOne) : publisher.addressLineOne != null)
-            return false;
-        if (city != null ? !city.equals(publisher.city) : publisher.city != null) return false;
-        if (state != null ? !state.equals(publisher.state) : publisher.state != null) return false;
-        return zip != null ? zip.equals(publisher.zip) : publisher.zip == null;
+        return id == publisher.id;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (addressLineOne != null ? addressLineOne.hashCode() : 0);
-        result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (state != null ? state.hashCode() : 0);
-        result = 31 * result + (zip != null ? zip.hashCode() : 0);
-        return result;
+        return (int) (id ^ (id >>> 32));
     }
 }

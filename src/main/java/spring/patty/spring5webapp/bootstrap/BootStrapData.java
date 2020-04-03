@@ -18,9 +18,7 @@ import spring.patty.spring5webapp.repositories.PublisherRepository;
 
  implementing interface CommandLineRunner which has
  one method to implement "run."
-
- .
-
+ 
  */
 
 
@@ -43,21 +41,27 @@ public class BootStrapData implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Author eric = new Author("Eric", "Evans");
         Book book = new Book("Domain Driven Design", "123123");
+
         Publisher pub = new Publisher("Random House");
+
         eric.getBooks().add(book);
         book.getAuthors().add(eric);
-
-
         // using repo methods to save objs
         // spring data JPA is using hybernate to save
         // these to in memory H2db
         authorRepository.save(eric);
         bookRepository.save(book);
+        publisherRepository.save(pub);
+
+        book.setPublisher(pub);
+        pub.getBooks().add(book);
         Author rod = new Author("Rod", "Johnson");
         Book noEJB = new Book("J2EE Development without EJB", "39486259");
 
         rod.getBooks().add(noEJB);
         noEJB.getAuthors().add(rod);
+        noEJB.setPublisher(pub);
+        pub.getBooks().add(noEJB);
 
         authorRepository.save(rod);
         bookRepository.save(noEJB);
@@ -65,7 +69,7 @@ public class BootStrapData implements CommandLineRunner {
 
         System.out.println("Started in Bootstram");
         System.out.println("Number of books: " + bookRepository.count());
-        System.out.println("Publisher count: " + publisherRepository.count());
+        System.out.println("Publisher number of books: " + pub.getBooks().size());
 
 
     }
