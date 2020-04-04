@@ -20,9 +20,9 @@ public class Author {
     private String firstName;
     private String lastName;
 
-    // many to many relationship to books, and mapped by authors
+    // many to many relationship to templates.templates, and mapped by authors
     @ManyToMany(mappedBy = "authors")
-    private Set<Book> books = new HashSet<>(); //initialize hash set of books by default
+    private Set<Book> books = new HashSet<>(); //initialize hash set of templates.templates by default
 
     public Author(){}
 
@@ -69,7 +69,6 @@ public class Author {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", books=" + books +
                 '}';
     }
 
