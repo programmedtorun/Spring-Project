@@ -68,8 +68,8 @@ public class BootStrapData implements CommandLineRunner {
         publisherRepository.save(pub);
 
         System.out.println("Started in Bootstram");
-        System.out.println("Number of templates.templates: " + bookRepository.count());
-        System.out.println("Publisher number of templates.templates: " + pub.getBooks().size());
+        System.out.println("Number of books: " + bookRepository.count());
+        System.out.println("Publisher count: " + pub.getBooks().size());
 
 
     }

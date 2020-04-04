@@ -16,7 +16,6 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.AUTO) // tells hybernate how it's getting generated
     private Long id;
 
-
     private String firstName;
     private String lastName;
 
