@@ -20,13 +20,15 @@ public class BookController {
         this.bookRepository = bookRepository;
     }
 
-    // at run time when spring gets a request to url /books it will execute the getBooks method
+    // at run time when spring gets a request to url /templates.templates it will execute the getBooks method
     // and provide a model obj
     @RequestMapping("/books")
     public String getBooks(Model model){
         model.addAttribute("books", bookRepository.findAll());
-
-
+//        for(Book book : bookRepository.findAll()){
+//            System.out.println("b00k is: " + book);
+//        }
+        System.out.println();
         return "books/list";
     }
 }
